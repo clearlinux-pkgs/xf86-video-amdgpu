@@ -4,7 +4,7 @@
 #
 Name     : xf86-video-amdgpu
 Version  : 1.3.0
-Release  : 1
+Release  : 2
 URL      : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-1.3.0.tar.gz
 Source0  : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-1.3.0.tar.gz
 Summary  : No detailed summary available
@@ -60,7 +60,9 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1494584075
+export SOURCE_DATE_EPOCH=1494585602
+export CFLAGS="-O3 -g -fopt-info-vec "
+unset LDFLAGS
 %configure --disable-static
 make V=1  %{?_smp_mflags}
 
@@ -72,7 +74,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1494584075
+export SOURCE_DATE_EPOCH=1494585602
 rm -rf %{buildroot}
 %make_install
 

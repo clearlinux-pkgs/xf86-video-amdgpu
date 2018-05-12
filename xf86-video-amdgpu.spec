@@ -6,7 +6,7 @@
 #
 Name     : xf86-video-amdgpu
 Version  : 18.0.1
-Release  : 7
+Release  : 8
 URL      : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-18.0.1.tar.gz
 Source0  : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-18.0.1.tar.gz
 Source99 : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-18.0.1.tar.gz.sig

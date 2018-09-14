@@ -5,17 +5,18 @@
 # Source0 file verified with key 0x5A81AF8E6ADBB200 (daenzer@debian.org)
 #
 Name     : xf86-video-amdgpu
-Version  : 18.0.1
-Release  : 10
-URL      : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-18.0.1.tar.gz
-Source0  : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-18.0.1.tar.gz
-Source99 : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-18.0.1.tar.gz.sig
+Version  : 18.1.0
+Release  : 11
+URL      : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-18.1.0.tar.gz
+Source0  : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-18.1.0.tar.gz
+Source99 : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-18.1.0.tar.gz.sig
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : MIT
 Requires: xf86-video-amdgpu-lib
 Requires: xf86-video-amdgpu-data
-Requires: xf86-video-amdgpu-doc
+Requires: xf86-video-amdgpu-license
+Requires: xf86-video-amdgpu-man
 BuildRequires : pkgconfig(fontsproto)
 BuildRequires : pkgconfig(gbm)
 BuildRequires : pkgconfig(gl)
@@ -41,32 +42,41 @@ Group: Data
 data components for the xf86-video-amdgpu package.
 
 
-%package doc
-Summary: doc components for the xf86-video-amdgpu package.
-Group: Documentation
-
-%description doc
-doc components for the xf86-video-amdgpu package.
-
-
 %package lib
 Summary: lib components for the xf86-video-amdgpu package.
 Group: Libraries
 Requires: xf86-video-amdgpu-data
+Requires: xf86-video-amdgpu-license
 
 %description lib
 lib components for the xf86-video-amdgpu package.
 
 
+%package license
+Summary: license components for the xf86-video-amdgpu package.
+Group: Default
+
+%description license
+license components for the xf86-video-amdgpu package.
+
+
+%package man
+Summary: man components for the xf86-video-amdgpu package.
+Group: Default
+
+%description man
+man components for the xf86-video-amdgpu package.
+
+
 %prep
-%setup -q -n xf86-video-amdgpu-18.0.1
+%setup -q -n xf86-video-amdgpu-18.1.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1522456104
+export SOURCE_DATE_EPOCH=1536942349
 export CFLAGS="-O3 -g -fopt-info-vec "
 unset LDFLAGS
 %configure --disable-static
@@ -80,8 +90,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1522456104
+export SOURCE_DATE_EPOCH=1536942349
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/doc/xf86-video-amdgpu
+cp COPYING %{buildroot}/usr/share/doc/xf86-video-amdgpu/COPYING
 %make_install
 
 %files
@@ -91,10 +103,14 @@ rm -rf %{buildroot}
 %defattr(-,root,root,-)
 /usr/share/X11/xorg.conf.d/10-amdgpu.conf
 
-%files doc
-%defattr(-,root,root,-)
-%doc /usr/share/man/man4/*
-
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/xorg/modules/drivers/amdgpu_drv.so
+
+%files license
+%defattr(-,root,root,-)
+/usr/share/doc/xf86-video-amdgpu/COPYING
+
+%files man
+%defattr(-,root,root,-)
+/usr/share/man/man4/amdgpu.4

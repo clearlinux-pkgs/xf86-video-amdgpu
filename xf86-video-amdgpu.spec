@@ -5,18 +5,18 @@
 # Source0 file verified with key 0x5A81AF8E6ADBB200 (daenzer@debian.org)
 #
 Name     : xf86-video-amdgpu
-Version  : 18.1.0
-Release  : 16
-URL      : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-18.1.0.tar.gz
-Source0  : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-18.1.0.tar.gz
-Source99 : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-18.1.0.tar.gz.sig
-Summary  : No detailed summary available
+Version  : 19.0.0
+Release  : 17
+URL      : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-19.0.0.tar.gz
+Source0  : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-19.0.0.tar.gz
+Source99 : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-19.0.0.tar.gz.sig
+Summary  : X.org amdgpu video driver
 Group    : Development/Tools
 License  : MIT
-Requires: xf86-video-amdgpu-lib
-Requires: xf86-video-amdgpu-data
-Requires: xf86-video-amdgpu-license
-Requires: xf86-video-amdgpu-man
+Requires: xf86-video-amdgpu-data = %{version}-%{release}
+Requires: xf86-video-amdgpu-lib = %{version}-%{release}
+Requires: xf86-video-amdgpu-license = %{version}-%{release}
+Requires: xf86-video-amdgpu-man = %{version}-%{release}
 BuildRequires : pkgconfig(fontsproto)
 BuildRequires : pkgconfig(gbm)
 BuildRequires : pkgconfig(gl)
@@ -30,9 +30,8 @@ BuildRequires : pkgconfig(xorg-server)
 BuildRequires : pkgconfig(xproto)
 
 %description
-xf86-video-amdgpu - AMD Radeon video driver for the Xorg X server
-Patches and questions regarding this software should be directed at the
-amd-gfx mailing list:
+xf86-video-amdgpu - Xorg driver for AMD Radeon GPUs using the amdgpu kernel driver
+==================================================================================
 
 %package data
 Summary: data components for the xf86-video-amdgpu package.
@@ -45,8 +44,8 @@ data components for the xf86-video-amdgpu package.
 %package lib
 Summary: lib components for the xf86-video-amdgpu package.
 Group: Libraries
-Requires: xf86-video-amdgpu-data
-Requires: xf86-video-amdgpu-license
+Requires: xf86-video-amdgpu-data = %{version}-%{release}
+Requires: xf86-video-amdgpu-license = %{version}-%{release}
 
 %description lib
 lib components for the xf86-video-amdgpu package.
@@ -69,16 +68,17 @@ man components for the xf86-video-amdgpu package.
 
 
 %prep
-%setup -q -n xf86-video-amdgpu-18.1.0
+%setup -q -n xf86-video-amdgpu-19.0.0
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1536942349
+export SOURCE_DATE_EPOCH=1551924907
 export CFLAGS="-O3 -g -fopt-info-vec "
 unset LDFLAGS
+export LDFLAGS="${LDFLAGS} -fno-lto"
 %configure --disable-static
 make  %{?_smp_mflags}
 
@@ -90,10 +90,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1536942349
+export SOURCE_DATE_EPOCH=1551924907
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/xf86-video-amdgpu
-cp COPYING %{buildroot}/usr/share/doc/xf86-video-amdgpu/COPYING
+mkdir -p %{buildroot}/usr/share/package-licenses/xf86-video-amdgpu
+cp COPYING %{buildroot}/usr/share/package-licenses/xf86-video-amdgpu/COPYING
 %make_install
 
 %files
@@ -108,9 +108,9 @@ cp COPYING %{buildroot}/usr/share/doc/xf86-video-amdgpu/COPYING
 /usr/lib64/xorg/modules/drivers/amdgpu_drv.so
 
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/xf86-video-amdgpu/COPYING
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/xf86-video-amdgpu/COPYING
 
 %files man
-%defattr(-,root,root,-)
+%defattr(0644,root,root,0755)
 /usr/share/man/man4/amdgpu.4

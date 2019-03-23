@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x5A81AF8E6ADBB200 (daenzer@debian.org)
 #
 Name     : xf86-video-amdgpu
-Version  : 19.0.0
-Release  : 17
-URL      : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-19.0.0.tar.gz
-Source0  : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-19.0.0.tar.gz
-Source99 : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-19.0.0.tar.gz.sig
+Version  : 19.0.1
+Release  : 18
+URL      : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-19.0.1.tar.gz
+Source0  : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-19.0.1.tar.gz
+Source99 : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-19.0.1.tar.gz.sig
 Summary  : X.org amdgpu video driver
 Group    : Development/Tools
 License  : MIT
@@ -68,14 +68,14 @@ man components for the xf86-video-amdgpu package.
 
 
 %prep
-%setup -q -n xf86-video-amdgpu-19.0.0
+%setup -q -n xf86-video-amdgpu-19.0.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1551924907
+export SOURCE_DATE_EPOCH=1553364370
 export CFLAGS="-O3 -g -fopt-info-vec "
 unset LDFLAGS
 export LDFLAGS="${LDFLAGS} -fno-lto"
@@ -90,7 +90,7 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1551924907
+export SOURCE_DATE_EPOCH=1553364370
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/xf86-video-amdgpu
 cp COPYING %{buildroot}/usr/share/package-licenses/xf86-video-amdgpu/COPYING

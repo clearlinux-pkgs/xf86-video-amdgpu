@@ -6,11 +6,11 @@
 #
 Name     : xf86-video-amdgpu
 Version  : 19.1.0
-Release  : 40
+Release  : 41
 URL      : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-19.1.0.tar.gz
 Source0  : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-19.1.0.tar.gz
-Source1 : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-19.1.0.tar.gz.sig
-Summary  : X.org amdgpu video driver
+Source1  : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-19.1.0.tar.gz.sig
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : MIT
 Requires: xf86-video-amdgpu-data = %{version}-%{release}
@@ -28,6 +28,7 @@ BuildRequires : pkgconfig(xf86driproto)
 BuildRequires : pkgconfig(xorg-macros)
 BuildRequires : pkgconfig(xorg-server)
 BuildRequires : pkgconfig(xproto)
+Patch1: backport-gcc10.patch
 
 %description
 xf86-video-amdgpu - Xorg driver for AMD Radeon GPUs using the amdgpu kernel driver
@@ -69,20 +70,21 @@ man components for the xf86-video-amdgpu package.
 
 %prep
 %setup -q -n xf86-video-amdgpu-19.1.0
+cd %{_builddir}/xf86-video-amdgpu-19.1.0
+%patch1 -p1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1570902114
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1589809568
 export GCC_IGNORE_WERROR=1
 export CFLAGS="-O3 -g -fopt-info-vec "
 unset LDFLAGS
 export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$CFLAGS -fno-lto "
-export FFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
 export CXXFLAGS="$CXXFLAGS -fno-lto "
 %configure --disable-static
 make  %{?_smp_mflags}
@@ -95,10 +97,10 @@ export no_proxy=localhost,127.0.0.1,0.0.0.0
 make VERBOSE=1 V=1 %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1570902114
+export SOURCE_DATE_EPOCH=1589809568
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/xf86-video-amdgpu
-cp COPYING %{buildroot}/usr/share/package-licenses/xf86-video-amdgpu/COPYING
+cp %{_builddir}/xf86-video-amdgpu-19.1.0/COPYING %{buildroot}/usr/share/package-licenses/xf86-video-amdgpu/a297a2b3d9f367ccee795c8a4260d8c7f40ab78f
 %make_install
 
 %files
@@ -114,7 +116,7 @@ cp COPYING %{buildroot}/usr/share/package-licenses/xf86-video-amdgpu/COPYING
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/xf86-video-amdgpu/COPYING
+/usr/share/package-licenses/xf86-video-amdgpu/a297a2b3d9f367ccee795c8a4260d8c7f40ab78f
 
 %files man
 %defattr(0644,root,root,0755)

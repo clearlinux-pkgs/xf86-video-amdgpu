@@ -6,7 +6,7 @@
 #
 Name     : xf86-video-amdgpu
 Version  : 19.1.0
-Release  : 43
+Release  : 44
 URL      : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-19.1.0.tar.gz
 Source0  : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-19.1.0.tar.gz
 Source1  : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-19.1.0.tar.gz.sig

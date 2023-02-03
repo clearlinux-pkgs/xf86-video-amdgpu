@@ -1,0 +1,15 @@
+--- xf86-video-amdgpu-22.0.0/src/amdgpu_pixmap.c~	2022-02-23 12:27:54.000000000 +0000
++++ xf86-video-amdgpu-22.0.0/src/amdgpu_pixmap.c	2023-02-03 23:20:39.620389943 +0000
+@@ -103,10 +103,12 @@
+ /* This should only be called when glamor is disabled */
+ Bool amdgpu_pixmap_init(ScreenPtr screen)
+ {
++#if USE_GLAMOR
+ 	if (!dixRegisterPrivateKey(&amdgpu_pixmap_index, PRIVATE_PIXMAP, 0))
+ 		return FALSE;
+ 
+ 	screen->CreatePixmap = amdgpu_pixmap_create;
+ 	screen->DestroyPixmap = amdgpu_pixmap_destroy;
++#endif
+ 	return TRUE;
+ }

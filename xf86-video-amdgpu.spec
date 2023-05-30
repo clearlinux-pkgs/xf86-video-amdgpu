@@ -7,7 +7,7 @@
 #
 Name     : xf86-video-amdgpu
 Version  : 23.0.0
-Release  : 313
+Release  : 314
 URL      : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-23.0.0.tar.gz
 Source0  : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-23.0.0.tar.gz
 Source1  : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-23.0.0.tar.gz.sig
@@ -86,7 +86,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1685374832
+export SOURCE_DATE_EPOCH=1685480067
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -115,7 +115,7 @@ cd ../buildavx2;
 make %{?_smp_mflags} check || :
 
 %install
-export SOURCE_DATE_EPOCH=1685374832
+export SOURCE_DATE_EPOCH=1685480067
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/xf86-video-amdgpu
 cp %{_builddir}/xf86-video-amdgpu-%{version}/COPYING %{buildroot}/usr/share/package-licenses/xf86-video-amdgpu/a297a2b3d9f367ccee795c8a4260d8c7f40ab78f || :

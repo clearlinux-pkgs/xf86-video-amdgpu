@@ -7,7 +7,7 @@
 #
 Name     : xf86-video-amdgpu
 Version  : 23.0.0
-Release  : 707
+Release  : 708
 URL      : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-23.0.0.tar.gz
 Source0  : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-23.0.0.tar.gz
 Source1  : https://www.x.org/releases/individual/driver/xf86-video-amdgpu-23.0.0.tar.gz.sig
